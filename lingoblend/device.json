@@ -1,0 +1,69 @@
+{
+  "title": "LingoBlend",
+  "description": "Your blended books, and the words you clip while reading them.",
+  "token": {
+    "file": "/.crosspoint/lingoblend.json",
+    "path": "token"
+  },
+  "browse": {
+    "format": "json",
+    "url": "https://www.lingoblend.app/reader-api/v1/catalog?list=books&page={page}&limit={limit}",
+    "method": "GET",
+    "headers": {
+      "Authorization": "Bearer {token}"
+    },
+    "items": "items",
+    "fields": {
+      "title": "title",
+      "author": "author",
+      "id": "id",
+      "url": "url"
+    },
+    "page_size": 8
+  },
+  "download": {
+    "url": "{url}",
+    "dest_dir": "/LingoBlend",
+    "filename": "{title}.epub",
+    "sidecar": {
+      "path": "{dest}.meta.json",
+      "body": "{\"lingoblend_book\":\"{id}\",\"source\":\"lingoblend\"}"
+    }
+  },
+  "auth": {
+    "type": "device_code",
+    "request": {
+      "url": "https://www.lingoblend.app/reader-api/v1/auth/device",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": "{\"client\":\"crosspoint\",\"v\":1}"
+    },
+    "poll": {
+      "url": "https://www.lingoblend.app/reader-api/v1/auth/token",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": "{\"device_code\":\"{device_code}\"}"
+    },
+    "verify_url_path": "verification_uri_complete"
+  },
+  "author": "LingoBlend",
+  "version": "1.1.0",
+  "events": {
+    "reader.session": {
+      "request": {
+        "url": "https://www.lingoblend.app/reader-api/v1/reading",
+        "method": "POST",
+        "headers": {
+          "Authorization": "Bearer {token}",
+          "Content-Type": "application/json"
+        },
+        "body": "{\"v\":1,\"id\":\"{event.id}\",\"ts\":\"{event.end_time}\",\"book\":\"{event.book}\",\"doc\":\"{event.document}\",\"start\":\"{event.start_time}\",\"dur\":\"{event.duration_seconds}\",\"bp0\":\"{event.start_progress_bp}\",\"bp1\":\"{event.end_progress_bp}\"}"
+      },
+      "connect": true
+    }
+  }
+}

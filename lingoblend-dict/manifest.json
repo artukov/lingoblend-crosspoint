@@ -1,0 +1,7 @@
+{
+  "title": "LingoBlend Dictionaries",
+  "mount": "settings",
+  "description": "Download the companion dictionary for a LingoBlend blended book, so looking a word up shows the word it replaced.",
+  "author": "LingoBlend",
+  "version": "1.2.0"
+}

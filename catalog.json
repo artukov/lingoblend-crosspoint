@@ -1,0 +1,32 @@
+{
+  "name": "LingoBlend",
+  "plugins": [
+    {
+      "name": "lingoblend",
+      "title": "LingoBlend",
+      "description": "Download your blended books, and send the words you clip back to your LingoBlend dictionary.",
+      "author": "LingoBlend",
+      "version": "1.1.0",
+      "base": "https://raw.githubusercontent.com/artukov/lingoblend-crosspoint/main/lingoblend/",
+      "files": [
+        "README.md",
+        "device.json",
+        "manifest.json",
+        "plugin.js"
+      ]
+    },
+    {
+      "name": "lingoblend-dict",
+      "title": "LingoBlend Dictionaries",
+      "description": "Download the companion dictionary for a LingoBlend blended book, so looking a word up shows the word it replaced.",
+      "author": "LingoBlend",
+      "version": "1.2.0",
+      "base": "https://raw.githubusercontent.com/artukov/lingoblend-crosspoint/main/lingoblend-dict/",
+      "files": [
+        "README.md",
+        "device.json",
+        "manifest.json"
+      ]
+    }
+  ]
+}

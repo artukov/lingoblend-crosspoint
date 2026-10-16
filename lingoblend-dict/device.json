@@ -1,0 +1,62 @@
+{
+  "title": "LingoBlend Dictionaries",
+  "browse": {
+    "format": "json",
+    "url": "https://www.lingoblend.app/reader-api/v1/catalog?list=dicts&page={page}&limit={limit}",
+    "method": "GET",
+    "headers": {
+      "Authorization": "Bearer {token}"
+    },
+    "items": "items",
+    "fields": {
+      "title": "title",
+      "author": "author",
+      "id": "id"
+    },
+    "page_size": 8,
+    "lists": [
+      {
+        "title": "My dictionaries"
+      },
+      {
+        "title": "Free library",
+        "url": "https://www.lingoblend.app/crosspoint/dict/all-{page}.json"
+      }
+    ]
+  },
+  "download": {
+    "dest_dir": "/dictionaries",
+    "bundle": {
+      "base": "base",
+      "files": "files",
+      "subdir": "{id}"
+    }
+  },
+  "description": "Companion dictionaries for your blended books, and for the free library.",
+  "author": "LingoBlend",
+  "version": "1.2.0",
+  "token": {
+    "file": "/.crosspoint/lingoblend.json",
+    "path": "token"
+  },
+  "auth": {
+    "type": "device_code",
+    "request": {
+      "url": "https://www.lingoblend.app/reader-api/v1/auth/device",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": "{\"client\":\"crosspoint\",\"v\":1}"
+    },
+    "poll": {
+      "url": "https://www.lingoblend.app/reader-api/v1/auth/token",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": "{\"device_code\":\"{device_code}\"}"
+    },
+    "verify_url_path": "verification_uri_complete"
+  }
+}
